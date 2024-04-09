@@ -1,0 +1,1838 @@
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+new file mode 100644
+--- /dev/null	(date 1712109915534)
++++ b/.idea/misc.xml	(date 1712109915534)
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="FrameworkDetectionExcludesConfiguration">
++    <file type="web" url="file://$PROJECT_DIR$" />
++  </component>
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="11" project-jdk-type="JavaSDK">
++    <output url="file://$PROJECT_DIR$/out" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+new file mode 100644
+--- /dev/null	(date 1712111539056)
++++ b/.idea/gradle.xml	(date 1712111539056)
+@@ -0,0 +1,16 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="GradleMigrationSettings" migrationVersion="1" />
++  <component name="GradleSettings">
++    <option name="linkedExternalProjectsSettings">
++      <GradleProjectSettings>
++        <option name="externalProjectPath" value="$PROJECT_DIR$" />
++        <option name="modules">
++          <set>
++            <option value="$PROJECT_DIR$" />
++          </set>
++        </option>
++      </GradleProjectSettings>
++    </option>
++  </component>
++</project>
+\ No newline at end of file
+Index: src/main/java/org/fullstack4/chap01/CalcController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fullstack4/chap01/CalcController.java b/src/main/java/org/fullstack4/chap01/CalcController.java
+new file mode 100644
+--- /dev/null	(date 1712133431508)
++++ b/src/main/java/org/fullstack4/chap01/CalcController.java	(date 1712133431508)
+@@ -0,0 +1,31 @@
++package org.fullstack4.chap01;
++
++import javax.servlet.*;
++import javax.servlet.http.*;
++import javax.servlet.annotation.*;
++import java.io.IOException;
++
++@WebServlet(name = "/CalcController", urlPatterns="/calc")
++public class CalcController extends HttpServlet {
++
++    @Override
++    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
++
++        request.getRequestDispatcher("/WEB-INF/input.jsp").forward(request,response);
++    }
++    @Override
++    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
++        String num1 = request.getParameter("num1");
++        String num2 = request.getParameter("num2");
++
++
++        if(num1 == null || num2 == null || num1.trim().isEmpty() || num2.trim().isEmpty()){
++            System.out.println(String.format("num1:%s , num2:%s",num1,num2));
++            request.getRequestDispatcher("/WEB-INF/input.jsp").forward(request, response);
++        }
++        else{
++            response.sendRedirect("/");
++        }
++
++    }
++}
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1712109900069)
++++ b/.idea/vcs.xml	(date 1712109900069)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: src/main/java/org/fullstack4/chap01/controller/BbsListController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fullstack4/chap01/controller/BbsListController.java b/src/main/java/org/fullstack4/chap01/controller/BbsListController.java
+new file mode 100644
+--- /dev/null	(date 1712625215515)
++++ b/src/main/java/org/fullstack4/chap01/controller/BbsListController.java	(date 1712625215515)
+@@ -0,0 +1,30 @@
++package org.fullstack4.chap01.controller;
++
++import org.fullstack4.chap01.dto.BbsDTO;
++import org.fullstack4.chap01.service.BbsService;
++
++import javax.servlet.*;
++import javax.servlet.http.*;
++import javax.servlet.annotation.*;
++import java.io.IOException;
++import java.util.List;
++
++@WebServlet(name = "BbsListController", value = "/bbs/list")
++public class BbsListController extends HttpServlet {
++    @Override
++    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
++        System.out.println("===============================================");
++        System.out.println("/bbs/list");
++        System.out.println("===============================================");
++
++        List<BbsDTO> dtoList = BbsService.INSTANCE.bbsList(); /// 데이터베이스에서 추가한듯 추가댐
++        req.setAttribute("list",dtoList);
++
++        req.getRequestDispatcher("/WEB-INF/views/bbs/list.jsp").forward(req, resp);
++    }
++
++    @Override
++    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
++
++    }
++}
+Index: src/main/java/org/fullstack4/chap01/domain/BbsVO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fullstack4/chap01/domain/BbsVO.java b/src/main/java/org/fullstack4/chap01/domain/BbsVO.java
+new file mode 100644
+--- /dev/null	(date 1712648693465)
++++ b/src/main/java/org/fullstack4/chap01/domain/BbsVO.java	(date 1712648693465)
+@@ -0,0 +1,22 @@
++package org.fullstack4.chap01.domain;
++
++import lombok.Builder;
++import lombok.Getter;
++import lombok.ToString;
++
++import java.time.LocalDate;
++import java.time.LocalDateTime;
++
++@Getter
++@Builder
++@ToString
++public class BbsVO {
++    private int idx;
++    private String user_id;
++    private String title;
++    private String content;
++    private String display_date;
++    private LocalDate reg_date;
++    private LocalDate modify_date;
++    private int readcnt;
++}
+Index: src/main/java/org/fullstack4/chap01/controller/BbsViewController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fullstack4/chap01/controller/BbsViewController.java b/src/main/java/org/fullstack4/chap01/controller/BbsViewController.java
+new file mode 100644
+--- /dev/null	(date 1712625907994)
++++ b/src/main/java/org/fullstack4/chap01/controller/BbsViewController.java	(date 1712625907994)
+@@ -0,0 +1,29 @@
++package org.fullstack4.chap01.controller;
++
++import org.fullstack4.chap01.dto.BbsDTO;
++import org.fullstack4.chap01.service.BbsService;
++
++import javax.servlet.*;
++import javax.servlet.http.*;
++import javax.servlet.annotation.*;
++import java.io.IOException;
++
++@WebServlet(name = "BbsViewController", value = "/bbs/view")
++public class BbsViewController extends HttpServlet {
++    @Override
++    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
++        System.out.println("===============================================");
++        System.out.println("/bbs/view");
++        System.out.println("===============================================");
++
++        int idx = Integer.parseInt(req.getParameter("idx"));
++        BbsDTO dto = BbsService.INSTANCE.view(idx);
++        req.setAttribute("dto",dto);
++        req.getRequestDispatcher("/WEB-INF/views/bbs/view.jsp").forward(req, resp);
++    }
++
++    @Override
++    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
++
++    }
++}
+Index: src/test/java/org/fullstack4/chap01/ConnectTests.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/org/fullstack4/chap01/ConnectTests.java b/src/test/java/org/fullstack4/chap01/ConnectTests.java
+new file mode 100644
+--- /dev/null	(date 1712642627897)
++++ b/src/test/java/org/fullstack4/chap01/ConnectTests.java	(date 1712642627897)
+@@ -0,0 +1,43 @@
++package org.fullstack4.chap01;
++
++import com.zaxxer.hikari.HikariConfig;
++import com.zaxxer.hikari.HikariDataSource;
++import org.junit.jupiter.api.Assertions;
++import org.junit.jupiter.api.Test;
++
++import java.sql.Connection;
++import java.sql.DriverManager;
++
++public class ConnectTests {
++    @Test
++    public void testConnection() throws Exception{
++        Class.forName("org.mariadb.jdbc.Driver");
++        Connection conn = DriverManager.getConnection(
++             "jdbc:mariadb://localhost:3306/webdb",
++                "root",
++                "1234"
++
++        );
++        Assertions.assertNotNull(conn);
++        conn.close();
++    }
++
++    @Test
++    public void testHikariCP() throws Exception {
++        HikariConfig config = new HikariConfig();
++        config.setDriverClassName("org.mariadb.jdbc.Driver");
++        config.setJdbcUrl("jdbc:mariadb://localhost:3306/webdb");
++        config.setUsername("root");
++        config.setPassword("1234");
++        config.addDataSourceProperty("cachePrepStmts","true");
++        config.addDataSourceProperty("prepStmtCacheSize","250");
++        config.addDataSourceProperty("prepStmtCacheSqlLimit","2048");
++
++        HikariDataSource ds = new HikariDataSource(config);
++        Connection conn = ds.getConnection();
++
++        System.out.println("Connection : "+conn);
++
++        conn.close();
++    }
++}
+Index: src/main/java/org/fullstack4/chap01/controller/BbsModifyController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fullstack4/chap01/controller/BbsModifyController.java b/src/main/java/org/fullstack4/chap01/controller/BbsModifyController.java
+new file mode 100644
+--- /dev/null	(date 1712216818971)
++++ b/src/main/java/org/fullstack4/chap01/controller/BbsModifyController.java	(date 1712216818971)
+@@ -0,0 +1,54 @@
++package org.fullstack4.chap01.controller;
++
++import javax.servlet.*;
++import javax.servlet.http.*;
++import javax.servlet.annotation.*;
++import java.io.IOException;
++
++@WebServlet(name = "BbsModifyController", value = "/bbs/modify")
++public class BbsModifyController extends HttpServlet {
++    @Override
++    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
++        req.getRequestDispatcher("/WEB-INF/bbs/modify.jsp").forward(req, resp);
++    }
++
++    @Override
++    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
++        req.setCharacterEncoding("UTF-8");
++
++        boolean check_flag = true;
++        String idx = req.getParameter("idx")==null?"":req.getParameter("idx");
++        String title = req.getParameter("title");
++        String reg_date = req.getParameter("reg_date");
++        String content = req.getParameter("content");
++        String[] hobbie = req.getParameterValues("hobbie");
++        String sex = req.getParameter("sex");
++        String titlerrmsg = "";
++        String regDaterrmsg = "";
++        String contenterrmsg = "";
++
++        if(title == null || title.trim().isEmpty() || reg_date == null || reg_date.isEmpty() || content.isEmpty() || content == null) {
++            if(title == null || title.trim().isEmpty()){
++                titlerrmsg = "제목 입력";
++            }
++            if(reg_date == null || reg_date.trim().isEmpty()){
++                regDaterrmsg = "날짜 입력";
++            }
++            if(content.isEmpty() || content == null){
++                contenterrmsg = "내용 입력";
++            }
++            check_flag = false;
++        }
++
++        if(check_flag){
++            System.out.println("수정 완료");
++            resp.sendRedirect("/bbs/list");
++
++        }else{
++            System.out.println("수정 실패");
++            req.getRequestDispatcher("/WEB-INF/bbs/modify.jsp?titlerrMsg="+titlerrmsg+"&regDaterrMsg="+regDaterrmsg+"&contenterrMsg="+contenterrmsg+"&idx="+idx).forward(req,resp);
++
++        }
++
++    }
++}
+Index: src/main/java/org/fullstack4/chap01/controller/BbsRegistController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fullstack4/chap01/controller/BbsRegistController.java b/src/main/java/org/fullstack4/chap01/controller/BbsRegistController.java
+new file mode 100644
+--- /dev/null	(date 1712213584513)
++++ b/src/main/java/org/fullstack4/chap01/controller/BbsRegistController.java	(date 1712213584513)
+@@ -0,0 +1,78 @@
++package org.fullstack4.chap01.controller;
++
++import javax.servlet.*;
++import javax.servlet.http.*;
++import javax.servlet.annotation.*;
++import java.io.IOException;
++import java.io.PrintWriter;
++import java.util.Arrays;
++
++@WebServlet(name = "BbsRegistController", value = "/bbs/regist")
++public class BbsRegistController extends HttpServlet {
++    @Override
++    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
++        req.getRequestDispatcher("/WEB-INF/bbs/regist.jsp").forward(req, resp);
++    }
++
++    @Override
++    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
++        req.setCharacterEncoding("UTF-8");
++
++        boolean check_flag = true;
++
++        String title = req.getParameter("title");
++        String reg_date = req.getParameter("reg_date");
++        String content = req.getParameter("content");
++        String[] hobbie = req.getParameterValues("hobbie");
++        String sex = req.getParameter("sex");
++        String titlerrmsg = "";
++        String regDaterrmsg = "";
++        String contenterrmsg = "";
++
++        if(title == null || title.trim().isEmpty() || reg_date == null || reg_date.isEmpty() || content.isEmpty() || content == null) {
++            if(title == null || title.trim().isEmpty()){
++                titlerrmsg = "제목 입력";
++            }
++            if(reg_date == null || reg_date.trim().isEmpty()){
++                regDaterrmsg = "날짜 입력";
++            }
++            if(content.isEmpty() || content == null){
++                contenterrmsg = "내용 입력";
++            }
++            check_flag = false;
++        }
++//
++//        System.out.println("등록 완료");
++//        resp.setContentType("text/html; charset=UTF-8");
++//        PrintWriter out = resp.getWriter();
++//        out.println("<html>");
++//        out.println("<body>");
++//        out.println("<br>title : "+ title);
++//        out.println("reg_date : "+ reg_date);
++//        out.println("content : "+ content);
++//        out.println("hobbie : "+ Arrays.toString(hobbie));
++//        out.println("hobbie : ");
++//        for(int i = 0; i<hobbie.length; i++){
++//            out.println(hobbie[i] + ",");
++//        }
++//        out.println("sex : "+ sex);
++//
++//        out.println("</body>");
++//        out.println("</html>");
++
++
++
++        if(check_flag){
++            System.out.println("등록 완료");
++            resp.sendRedirect("/bbs/list");
++
++        }else{
++            System.out.println("등록 실패");
++            req.getRequestDispatcher("/WEB-INF/bbs/regist.jsp?titlerrMsg="+titlerrmsg+"&regDaterrMsg="+regDaterrmsg+"&contenterrMsg="+contenterrmsg).forward(req,resp);
++
++        }
++
++
++
++    }
++}
+Index: src/main/java/org/fullstack4/chap01/controller/BbsDeleteController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fullstack4/chap01/controller/BbsDeleteController.java b/src/main/java/org/fullstack4/chap01/controller/BbsDeleteController.java
+new file mode 100644
+--- /dev/null	(date 1712217082637)
++++ b/src/main/java/org/fullstack4/chap01/controller/BbsDeleteController.java	(date 1712217082637)
+@@ -0,0 +1,23 @@
++package org.fullstack4.chap01.controller;
++
++import javax.servlet.*;
++import javax.servlet.http.*;
++import javax.servlet.annotation.*;
++import java.io.IOException;
++
++@WebServlet(name = "BbsDeleteController", value = "/bbs/delete")
++public class BbsDeleteController extends HttpServlet {
++    @Override
++    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
++        String idx = req.getParameter("idx");
++        System.out.println(idx+"번째 게시글 삭제 완료: GET");
++        resp.sendRedirect("/bbs/list");
++    }
++
++    @Override
++    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
++        String idx = req.getParameter("idx");
++        System.out.println(idx+"번째 게시글 삭제 완료: POST");
++        resp.sendRedirect("/bbs/list");
++    }
++}
+Index: src/main/webapp/WEB-INF/views/bbs/list.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/WEB-INF/views/bbs/list.jsp b/src/main/webapp/WEB-INF/views/bbs/list.jsp
+new file mode 100644
+--- /dev/null	(date 1712626080523)
++++ b/src/main/webapp/WEB-INF/views/bbs/list.jsp	(date 1712626080523)
+@@ -0,0 +1,44 @@
++<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
++<%--
++  Created by IntelliJ IDEA.
++  User: user
++  Date: 2024-04-04
++  Time: 오전 11:05
++  To change this template use File | Settings | File Templates.
++--%>
++<%@ page contentType="text/html;charset=UTF-8" language="java" %>
++<html>
++<head>
++    <title>Title</title>
++    <meta charset = "utf-8"/>
++</head>
++<body>
++<h1>게시판 리스트</h1>
++
++<%--<ul>--%>
++<%--    <li>글번호 제목 등록일</li>--%>
++<%--    <% for(int i =1; i<=10; i++){%>--%>
++<%--    <li><a href="/bbs/view?idx=<%=i%>"><%=i%></a>&nbsp;&nbsp;게시판 글제목  <%=i%></li>--%>
++<%--    <%}%>--%>
++<%--</ul>--%>
++    <ul>
++        <c:forEach var="bbsDTO" items="${list}">
++            <li><a href="/bbs/view?idx=${bbsDTO.idx}">${bbsDTO}</a></li>
++        </c:forEach>
++    </ul>
++<br>
++
++<button id="btn_regist" onclick="location.href='/bbs/regist'">글등록</button>
++
++<br>
++
++<ul>
++    <li><a href="/bbs/regist">등록</a></li>
++    <li><a href="/bbs/modify">수정</a></li>
++    <li><a href="/bbs/delete">삭제</a></li>
++    <li><a href="/bbs/list">리스트</a></li>
++    <li><a href="/bbs/view">상세</a></li>
++</ul>
++
++</body>
++</html>
+Index: src/main/webapp/WEB-INF/views/bbs/regist.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/WEB-INF/views/bbs/regist.jsp b/src/main/webapp/WEB-INF/views/bbs/regist.jsp
+new file mode 100644
+--- /dev/null	(date 1712213569744)
++++ b/src/main/webapp/WEB-INF/views/bbs/regist.jsp	(date 1712213569744)
+@@ -0,0 +1,67 @@
++<%--
++  Created by IntelliJ IDEA.
++  User: user
++  Date: 2024-04-04
++  Time: 오전 11:05
++  To change this template use File | Settings | File Templates.
++--%>
++<%@ page contentType="text/html;charset=UTF-8" language="java" %>
++
++<html>
++<head>
++    <title>Title</title>
++    <meta charset = "utf-8"/>
++</head>
++<body>
++<h1>게시판 등록</h1>
++
++<div>
++    <form name="frmRegist" id="frmRegist" method="post" action="/bbs/regist">
++
++        <table>
++            <tr>
++                <td><span>제목 :</span></td>
++                <td><input type="text" name="title" id="title" value="" maxlength="200" placeholder="글 제목을 입력하세요."/></td>
++                <td style="color:red"><%=request.getParameter("titlerrMsg")==null?"":request.getParameter("titlerrMsg")%></td>
++            </tr>
++            <tr>
++                <td><span>등록일 :</span></td>
++                <td><input type="date" name="reg_date" id="reg_date" value="" /></td>
++                <td style="color:red"><%=request.getParameter("regDaterrMsg")==null?"":request.getParameter("regDaterrMsg")%></td>
++            </tr>
++            <tr>
++                <td><span>글 내용 :</span></td>
++                <td><textarea name="content" id="content" rows="10" cols="80"></textarea></td>
++                <td style="color:red"><%=request.getParameter("contenterrMsg")==null?"":request.getParameter("contenterrMsg")%></td>
++            </tr>
++            <tr>
++                <td><span>취미 :</span></td>
++                <td>
++                    <input type="checkbox" name="hobbie" id="hobbie_0" value="여행"> 여행
++                    <input type="checkbox" name="hobbie" id="hobbie_1" value="독서"> 독서
++                    <input type="checkbox" name="hobbie" id="hobbie_2" value="수영"> 수영
++                    <input type="checkbox" name="hobbie" id="hobbie_3" value="잠자기"> 잠자기
++                    <input type="checkbox" name="hobbie" id="hobbie_4" value="게임"> 게임
++                </td>
++            </tr>
++            <tr>
++                <td><span>성별 : </span></td>
++                <td>
++                    <input type="radio" name="sex" id="sex_0" value="남"> 남자
++                    <input type="radio" name="sex" id="sex_1" value="여"> 여자
++                </td>
++            </tr>
++            <tr>
++                <td colspan ="2">
++                    <button type="submit">등록</button>
++                    <button type="reset">취소</button>
++                </td>
++            </tr>
++        </table>
++
++
++    </form>
++
++</div>
++</body>
++</html>
+Index: src/main/webapp/WEB-INF/views/bbs/view.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/WEB-INF/views/bbs/view.jsp b/src/main/webapp/WEB-INF/views/bbs/view.jsp
+new file mode 100644
+--- /dev/null	(date 1712625855078)
++++ b/src/main/webapp/WEB-INF/views/bbs/view.jsp	(date 1712625855078)
+@@ -0,0 +1,33 @@
++<%--
++  Created by IntelliJ IDEA.
++  User: user
++  Date: 2024-04-04
++  Time: 오전 11:06
++  To change this template use File | Settings | File Templates.
++--%>
++<%@ page contentType="text/html;charset=UTF-8" language="java" %>
++<html>
++<head>
++    <title>Title</title>
++</head>
++<body>
++<h1>게시판 상세</h1>
++<div>
++    <div>${dto.idx}</div>
++    <div>${dto.user_id}</div>
++    <div>${dto.title}</div>
++    <div>${dto.content}</div>
++    <div>${dto.display_date}</div>
++    <div>${dto.readcnt}</div>
++
++    </form>
++</div>
++<ul>
++    <li><a href="/bbs/regist">등록</a></li>
++    <li><a href="/bbs/modify">수정</a></li>
++    <li><a href="/bbs/delete">삭제</a></li>
++    <li><a href="/bbs/list">리스트</a></li>
++    <li><a href="/bbs/view">상세</a></li>
++</ul>
++</body>
++</html>
+Index: src/main/webapp/WEB-INF/views/bbs/modify.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/WEB-INF/views/bbs/modify.jsp b/src/main/webapp/WEB-INF/views/bbs/modify.jsp
+new file mode 100644
+--- /dev/null	(date 1712216818968)
++++ b/src/main/webapp/WEB-INF/views/bbs/modify.jsp	(date 1712216818968)
+@@ -0,0 +1,63 @@
++<%--
++  Created by IntelliJ IDEA.
++  User: user
++  Date: 2024-04-04
++  Time: 오전 11:06
++  To change this template use File | Settings | File Templates.
++--%>
++<%@ page contentType="text/html;charset=UTF-8" language="java" %>
++<html>
++<head>
++    <title>Title</title>
++    <meta charset = "utf-8"/>
++</head>
++<body>
++<h1>게시판 수정</h1>
++
++<div>
++    <form name="frmModify" id="frmModify" method="post" action="/bbs/modify?idx=<%= request.getParameter("idx")%>">
++        <table>
++            <tr>
++                <td><span>제목 :</span></td>
++                <td><input type="text" name="title" id="title" value="" maxlength="200" placeholder="글 제목을 입력하세요."/></td>
++                <td style="color:red"><%=request.getParameter("titlerrMsg")==null?"":request.getParameter("titlerrMsg")%></td>
++            </tr>
++            <tr>
++                <td><span>등록일 :</span></td>
++                <td><input type="date" name="reg_date" id="reg_date" value="" /></td>
++                <td style="color:red"><%=request.getParameter("regDaterrMsg")==null?"":request.getParameter("regDaterrMsg")%></td>
++            </tr>
++            <tr>
++                <td><span>글 내용 :</span></td>
++                <td><textarea name="content" id="content" rows="10" cols="80"></textarea></td>
++                <td style="color:red"><%=request.getParameter("contenterrMsg")==null?"":request.getParameter("contenterrMsg")%></td>
++            </tr>
++            <tr>
++                <td><span>취미 :</span></td>
++                <td>
++                    <input type="checkbox" name="hobbie" id="hobbie_0" value="여행"> 여행
++                    <input type="checkbox" name="hobbie" id="hobbie_1" value="독서"> 독서
++                    <input type="checkbox" name="hobbie" id="hobbie_2" value="수영"> 수영
++                    <input type="checkbox" name="hobbie" id="hobbie_3" value="잠자기"> 잠자기
++                    <input type="checkbox" name="hobbie" id="hobbie_4" value="게임"> 게임
++                </td>
++            </tr>
++            <tr>
++                <td><span>성별 : </span></td>
++                <td>
++                    <input type="radio" name="sex" id="sex_0" value="남"> 남자
++                    <input type="radio" name="sex" id="sex_1" value="여"> 여자
++                </td>
++            </tr>
++            <tr>
++                <td colspan ="2">
++                    <button type="submit">등록</button>
++                    <button type="button" onclick="location.href='/bbs/view.jsp?idx=1'">취소</button>
++                </td>
++            </tr>
++        </table>
++    </form>
++</div>
++
++</body>
++</html>
+Index: .idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1712109900761)
++++ b/.idea/.gitignore	(date 1712109900761)
+@@ -0,0 +1,8 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Editor-based HTTP Client requests
++/httpRequests/
++# Datasource local storage ignored files
++/dataSources/
++/dataSources.local.xml
+Index: src/main/java/dao.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/dao.java b/src/main/java/dao.java
+new file mode 100644
+--- /dev/null	(date 1712642974197)
++++ b/src/main/java/dao.java	(date 1712642974197)
+@@ -0,0 +1,2 @@
++public class dao {
++}
+Index: src/main/java/org/fullstack4/chap01/dao/ConnectionUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fullstack4/chap01/dao/ConnectionUtil.java b/src/main/java/org/fullstack4/chap01/dao/ConnectionUtil.java
+new file mode 100644
+--- /dev/null	(date 1712642998306)
++++ b/src/main/java/org/fullstack4/chap01/dao/ConnectionUtil.java	(date 1712642998306)
+@@ -0,0 +1,30 @@
++package org.fullstack4.chap01.dao;
++
++import com.zaxxer.hikari.HikariConfig;
++import com.zaxxer.hikari.HikariDataSource;
++
++import java.sql.Connection;
++
++public enum ConnectionUtil {
++
++    INSTANCE;
++
++    private HikariDataSource ds;
++
++    ConnectionUtil() {
++        HikariConfig config = new HikariConfig();
++        config.setDriverClassName("org.mariadb.jdbc.Driver");
++        config.setJdbcUrl("jdbc:mariadb://localhost:3306/webdb");
++        config.setUsername("root");
++        config.setPassword("1234");
++        config.addDataSourceProperty("cachePrepStmts", "true");
++        config.addDataSourceProperty("prepStmtCacheSize", "250");
++        config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
++
++        ds = new HikariDataSource(config);
++    }
++
++    public Connection getConnection() throws Exception{
++        return ds.getConnection();
++    }
++}
+Index: .idea/dataSources.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/dataSources.xml b/.idea/dataSources.xml
+new file mode 100644
+--- /dev/null	(date 1712635657653)
++++ b/.idea/dataSources.xml	(date 1712635657653)
+@@ -0,0 +1,17 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
++    <data-source source="LOCAL" name="webdb@localhost" uuid="fc81afda-3cb8-4b10-8622-4c7396a38903">
++      <driver-ref>mariadb</driver-ref>
++      <synchronize>true</synchronize>
++      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
++      <jdbc-url>jdbc:mariadb://localhost:3306/webdb</jdbc-url>
++      <jdbc-additional-properties>
++        <property name="com.intellij.clouds.kubernetes.db.host.port" />
++        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
++        <property name="com.intellij.clouds.kubernetes.db.container.port" />
++      </jdbc-additional-properties>
++      <working-dir>$ProjectFileDir$</working-dir>
++    </data-source>
++  </component>
++</project>
+\ No newline at end of file
+Index: src/main/java/org/fullstack4/chap01/dao/BbsDAO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fullstack4/chap01/dao/BbsDAO.java b/src/main/java/org/fullstack4/chap01/dao/BbsDAO.java
+new file mode 100644
+--- /dev/null	(date 1712650737945)
++++ b/src/main/java/org/fullstack4/chap01/dao/BbsDAO.java	(date 1712650737945)
+@@ -0,0 +1,155 @@
++package org.fullstack4.chap01.dao;
++
++import lombok.Cleanup;
++import org.fullstack4.chap01.domain.BbsVO;
++
++import java.sql.Connection;
++import java.sql.PreparedStatement;
++import java.sql.ResultSet;
++import java.util.ArrayList;
++import java.util.List;
++
++public class BbsDAO {
++
++    public String getTime(){
++        String now = null;
++        try(
++                Connection conn = ConnectionUtil.INSTANCE.getConnection();
++                PreparedStatement preparedStatement = conn.prepareStatement("select now()");
++                ResultSet rs = preparedStatement.executeQuery();
++                ){
++            rs.next();
++            now = rs.getString(1);
++        }catch (Exception e){
++            System.out.println("Error : " + e.getMessage());
++            e.printStackTrace();
++        }
++        return now;
++
++    }
++
++    public String getTime2() throws Exception{
++        @Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
++        @Cleanup PreparedStatement preparedStatement = conn.prepareStatement("select now()");
++        @Cleanup ResultSet rs = preparedStatement.executeQuery();
++
++        rs.next();
++        String now = rs.getString(1);
++        return now;
++
++    }
++
++    public void regist(BbsVO vo) throws Exception{
++        StringBuilder sb = new StringBuilder();
++        sb.append("INSERT INTO tbl_bbs");
++        sb.append(" (user_id, title, content, display_date, read_cnt, reg_date) ");
++        sb.append(" VALUES( ?, ?, ?, ?, ?, now())");
++
++        @Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
++        @Cleanup PreparedStatement pstmt = conn.prepareStatement(sb.toString());
++        pstmt.setString(1, vo.getUser_id());
++        pstmt.setString(2, vo.getTitle());
++        pstmt.setString(3, vo.getContent());
++        pstmt.setString(4, vo.getDisplay_date());
++        pstmt.setInt(5, vo.getReadcnt());
++
++        pstmt.executeUpdate();
++
++    }
++
++    public List<BbsVO> list() throws Exception{
++        StringBuilder sb = new StringBuilder();
++        sb.append("SELECT idx, user_id, title, content, display_date, read_cnt,reg_date");
++        sb.append(" FROM tbl_bbs ");
++        sb.append(" ORDER BY idx DESC");
++
++        @Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
++        @Cleanup PreparedStatement pstmt = conn.prepareStatement(sb.toString());
++        @Cleanup ResultSet rs = pstmt.executeQuery();
++
++        List<BbsVO> bbsList = new ArrayList<>();
++        while(rs.next()){
++
++            BbsVO vo = BbsVO.builder()
++                    .idx(rs.getInt("idx"))
++                    .user_id(rs.getString("title"))
++                    .content(rs.getString("content"))
++                    .display_date(rs.getString("display_date"))
++                    .readcnt(rs.getInt("read_cnt"))
++                    .build();
++
++            bbsList.add(vo);
++        }
++
++        return bbsList;
++    }
++
++    public BbsVO view(int idx) throws Exception{
++        StringBuilder sb = new StringBuilder();
++        sb.append("SELECT idx, user_id, title, content, display_date, read_cnt,reg_date");
++        sb.append(" FROM tbl_bbs ");
++        sb.append(" WHERE idx = ? ");
++
++        @Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
++        @Cleanup PreparedStatement pstmt = conn.prepareStatement(sb.toString());
++        pstmt.setInt(1,idx);
++        @Cleanup ResultSet rs = pstmt.executeQuery();
++
++        rs.next();
++
++        BbsVO vo = BbsVO.builder()
++        .idx(rs.getInt("idx"))
++                .user_id(rs.getString("user_id"))
++                .title(rs.getString("title"))
++                .content(rs.getString("content"))
++                .display_date(rs.getString("content"))
++                .readcnt(rs.getInt("readcnt"))
++                .reg_date(rs.getDate("reg_date").toLocalDate())
++                .build();
++
++        return vo;
++    }
++
++    public void modify(BbsVO vo) throws Exception{
++        StringBuilder sb = new StringBuilder();
++        sb.append("UPDATE tbl_bbs SET");
++        sb.append(" user_id=? ");
++        sb.append(" , title = ? ");
++        sb.append(" , content = ? ");
++        sb.append(" , display_date = ? ");
++        sb.append(" , read_cnt = ? ");
++        sb.append(" , modify_date = now() ");
++        sb.append(" WHERE idx  = ? ");
++
++        @Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
++        @Cleanup PreparedStatement pstmt = conn.prepareStatement(sb.toString());
++        pstmt.setString(1, vo.getUser_id());
++        pstmt.setString(2, vo.getTitle());
++        pstmt.setString(3, vo.getContent());
++        pstmt.setString(4, vo.getDisplay_date());
++        pstmt.setInt(5, vo.getReadcnt());
++        pstmt.setInt(6, vo.getIdx());
++        int result = pstmt.executeUpdate();
++
++        System.out.println("=================================");
++        System.out.println("BbsDAO >> modify(");
++        System.out.println("=================================");
++
++    }
++
++    public void delete(int idx) throws Exception{
++        String sql = "DELETE FROM tbl_bbs WHERE idx = ? ";
++
++
++        @Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
++        @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
++
++        pstmt.setInt(1, idx);
++        int result = pstmt.executeUpdate();
++
++        System.out.println("=================================");
++        System.out.println("BbsDAO >>  delete(");
++        System.out.println("=================================");
++    }
++
++}
+Index: src/test/java/org/fullstack4/chap01/BbsDAOTests.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/org/fullstack4/chap01/BbsDAOTests.java b/src/test/java/org/fullstack4/chap01/BbsDAOTests.java
+new file mode 100644
+--- /dev/null	(date 1712650689939)
++++ b/src/test/java/org/fullstack4/chap01/BbsDAOTests.java	(date 1712650689939)
+@@ -0,0 +1,84 @@
++package org.fullstack4.chap01;
++
++import lombok.Cleanup;
++import org.fullstack4.chap01.dao.BbsDAO;
++import org.fullstack4.chap01.dao.ConnectionUtil;
++import org.fullstack4.chap01.domain.BbsVO;
++import org.junit.jupiter.api.BeforeEach;
++import org.junit.jupiter.api.Test;
++
++import java.sql.Array;
++import java.sql.Connection;
++import java.sql.PreparedStatement;
++import java.sql.ResultSet;
++import java.time.LocalDate;
++import java.util.ArrayList;
++import java.util.List;
++
++public class BbsDAOTests {
++    private BbsDAO dao;
++
++    @BeforeEach //// 반드시 선실행되어야할 떄 필요한 어노테이션
++    public void ready(){
++        dao = new BbsDAO();
++
++    }
++
++    @Test
++    public void testGetTime() throws Exception{
++        System.out.println("BbsDAO.getTime() : "+dao.getTime());
++    }
++
++    @Test
++    public void testGetTime2() throws Exception{
++        System.out.println("BbsDAO.getTime2() : "+dao.getTime2());
++    }
++
++    @Test
++    public void testRegist() throws Exception{
++
++        BbsVO vo = BbsVO.builder()
++                .user_id("test")
++                .title("게시글 제목 테스트")
++                .content("게시글 내용 테스트")
++                .display_date(LocalDate.now().toString())
++                .readcnt(0)
++        .build();
++        dao.regist(vo);
++    }
++
++    @Test
++    public void testList() throws Exception{
++        List<BbsVO> list = dao.list();
++        list.forEach(vo->System.out.println(vo));
++
++
++    }
++
++    @Test
++
++    public void testView() throws Exception{
++        BbsVO view = dao.view(1);
++
++    }
++
++
++    @Test
++    public void testModify() throws Exception{
++        BbsVO vo = BbsVO.builder()
++                .idx(1)
++                .user_id("test")
++                .title("게시글 제목 테스트")
++                .content("게시글 내용 테스트")
++                .display_date(LocalDate.now().toString())
++                .readcnt(0)
++                .build();
++        dao.modify(vo);
++    }
++
++    @Test
++    public void testDelete() throws Exception{
++        int idx = 1;
++        dao.delete(idx);
++    }
++}
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build.gradle b/build.gradle
+new file mode 100644
+--- /dev/null	(date 1712644121914)
++++ b/build.gradle	(date 1712644121914)
+@@ -0,0 +1,49 @@
++plugins {
++    id 'java'
++    id 'war'
++}
++
++group 'org.fullstack4'
++version '1.0-SNAPSHOT'
++
++repositories {
++    mavenCentral()
++}
++
++ext {
++    junitVersion = '5.9.2'
++}
++
++sourceCompatibility = '1.8'
++targetCompatibility = '1.8'
++
++tasks.withType(JavaCompile) {
++    options.encoding = 'UTF-8'
++}
++
++dependencies {
++    compileOnly('javax.servlet:javax.servlet-api:4.0.1')
++
++    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
++    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
++
++    // https://mvnrepository.com/artifact/jstl/jstl
++    implementation group: 'jstl', name: 'jstl', version: '1.2'
++
++    // https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
++    implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '3.0.4'
++
++    // https://mvnrepository.com/artifact/org.projectlombok/lombok
++    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
++    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
++    testCompileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
++    testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.22'
++
++    // https://mvnrepository.com/artifact/com.zaxxer/HikariCP
++    implementation group: 'com.zaxxer', name: 'HikariCP', version: '5.0.0'
++
++}
++
++test {
++    useJUnitPlatform()
++}
+\ No newline at end of file
+Index: gradlew.bat
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/gradlew.bat b/gradlew.bat
+new file mode 100644
+--- /dev/null	(date 1712109893405)
++++ b/gradlew.bat	(date 1712109893405)
+@@ -0,0 +1,89 @@
++@rem
++@rem Copyright 2015 the original author or authors.
++@rem
++@rem Licensed under the Apache License, Version 2.0 (the "License");
++@rem you may not use this file except in compliance with the License.
++@rem You may obtain a copy of the License at
++@rem
++@rem      https://www.apache.org/licenses/LICENSE-2.0
++@rem
++@rem Unless required by applicable law or agreed to in writing, software
++@rem distributed under the License is distributed on an "AS IS" BASIS,
++@rem WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++@rem See the License for the specific language governing permissions and
++@rem limitations under the License.
++@rem
++
++@if "%DEBUG%" == "" @echo off
++@rem ##########################################################################
++@rem
++@rem  Gradle startup script for Windows
++@rem
++@rem ##########################################################################
++
++@rem Set local scope for the variables with windows NT shell
++if "%OS%"=="Windows_NT" setlocal
++
++set DIRNAME=%~dp0
++if "%DIRNAME%" == "" set DIRNAME=.
++set APP_BASE_NAME=%~n0
++set APP_HOME=%DIRNAME%
++
++@rem Resolve any "." and ".." in APP_HOME to make it shorter.
++for %%i in ("%APP_HOME%") do set APP_HOME=%%~fi
++
++@rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
++set DEFAULT_JVM_OPTS="-Xmx64m" "-Xms64m"
++
++@rem Find java.exe
++if defined JAVA_HOME goto findJavaFromJavaHome
++
++set JAVA_EXE=java.exe
++%JAVA_EXE% -version >NUL 2>&1
++if "%ERRORLEVEL%" == "0" goto execute
++
++echo.
++echo ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
++echo.
++echo Please set the JAVA_HOME variable in your environment to match the
++echo location of your Java installation.
++
++goto fail
++
++:findJavaFromJavaHome
++set JAVA_HOME=%JAVA_HOME:"=%
++set JAVA_EXE=%JAVA_HOME%/bin/java.exe
++
++if exist "%JAVA_EXE%" goto execute
++
++echo.
++echo ERROR: JAVA_HOME is set to an invalid directory: %JAVA_HOME%
++echo.
++echo Please set the JAVA_HOME variable in your environment to match the
++echo location of your Java installation.
++
++goto fail
++
++:execute
++@rem Setup the command line
++
++set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
++
++
++@rem Execute Gradle
++"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %*
++
++:end
++@rem End local scope for the variables with windows NT shell
++if "%ERRORLEVEL%"=="0" goto mainEnd
++
++:fail
++rem Set variable GRADLE_EXIT_CONSOLE if you need the _script_ return code instead of
++rem the _cmd.exe /c_ return code!
++if  not "" == "%GRADLE_EXIT_CONSOLE%" exit 1
++exit /b 1
++
++:mainEnd
++if "%OS%"=="Windows_NT" endlocal
++
++:omega
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+--- /dev/null	(date 1712109893405)
++++ b/.gitignore	(date 1712109893405)
+@@ -0,0 +1,42 @@
++.gradle
++build/
++!gradle/wrapper/gradle-wrapper.jar
++!**/src/main/**/build/
++!**/src/test/**/build/
++
++### IntelliJ IDEA ###
++.idea/modules.xml
++.idea/jarRepositories.xml
++.idea/compiler.xml
++.idea/libraries/
++*.iws
++*.iml
++*.ipr
++out/
++!**/src/main/**/out/
++!**/src/test/**/out/
++
++### Eclipse ###
++.apt_generated
++.classpath
++.factorypath
++.project
++.settings
++.springBeans
++.sts4-cache
++bin/
++!**/src/main/**/bin/
++!**/src/test/**/bin/
++
++### NetBeans ###
++/nbproject/private/
++/nbbuild/
++/dist/
++/nbdist/
++/.nb-gradle/
++
++### VS Code ###
++.vscode/
++
++### Mac OS ###
++.DS_Store
+\ No newline at end of file
+Index: gradlew
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/gradlew b/gradlew
+new file mode 100644
+--- /dev/null	(date 1712109893403)
++++ b/gradlew	(date 1712109893403)
+@@ -0,0 +1,234 @@
++#!/bin/sh
++
++#
++# Copyright © 2015-2021 the original authors.
++#
++# Licensed under the Apache License, Version 2.0 (the "License");
++# you may not use this file except in compliance with the License.
++# You may obtain a copy of the License at
++#
++#      https://www.apache.org/licenses/LICENSE-2.0
++#
++# Unless required by applicable law or agreed to in writing, software
++# distributed under the License is distributed on an "AS IS" BASIS,
++# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++# See the License for the specific language governing permissions and
++# limitations under the License.
++#
++
++##############################################################################
++#
++#   Gradle start up script for POSIX generated by Gradle.
++#
++#   Important for running:
++#
++#   (1) You need a POSIX-compliant shell to run this script. If your /bin/sh is
++#       noncompliant, but you have some other compliant shell such as ksh or
++#       bash, then to run this script, type that shell name before the whole
++#       command line, like:
++#
++#           ksh Gradle
++#
++#       Busybox and similar reduced shells will NOT work, because this script
++#       requires all of these POSIX shell features:
++#         * functions;
++#         * expansions «$var», «${var}», «${var:-default}», «${var+SET}»,
++#           «${var#prefix}», «${var%suffix}», and «$( cmd )»;
++#         * compound commands having a testable exit status, especially «case»;
++#         * various built-in commands including «command», «set», and «ulimit».
++#
++#   Important for patching:
++#
++#   (2) This script targets any POSIX shell, so it avoids extensions provided
++#       by Bash, Ksh, etc; in particular arrays are avoided.
++#
++#       The "traditional" practice of packing multiple parameters into a
++#       space-separated string is a well documented source of bugs and security
++#       problems, so this is (mostly) avoided, by progressively accumulating
++#       options in "$@", and eventually passing that to Java.
++#
++#       Where the inherited environment variables (DEFAULT_JVM_OPTS, JAVA_OPTS,
++#       and GRADLE_OPTS) rely on word-splitting, this is performed explicitly;
++#       see the in-line comments for details.
++#
++#       There are tweaks for specific operating systems such as AIX, CygWin,
++#       Darwin, MinGW, and NonStop.
++#
++#   (3) This script is generated from the Groovy template
++#       https://github.com/gradle/gradle/blob/master/subprojects/plugins/src/main/resources/org/gradle/api/internal/plugins/unixStartScript.txt
++#       within the Gradle project.
++#
++#       You can find Gradle at https://github.com/gradle/gradle/.
++#
++##############################################################################
++
++# Attempt to set APP_HOME
++
++# Resolve links: $0 may be a link
++app_path=$0
++
++# Need this for daisy-chained symlinks.
++while
++    APP_HOME=${app_path%"${app_path##*/}"}  # leaves a trailing /; empty if no leading path
++    [ -h "$app_path" ]
++do
++    ls=$( ls -ld "$app_path" )
++    link=${ls#*' -> '}
++    case $link in             #(
++      /*)   app_path=$link ;; #(
++      *)    app_path=$APP_HOME$link ;;
++    esac
++done
++
++APP_HOME=$( cd "${APP_HOME:-./}" && pwd -P ) || exit
++
++APP_NAME="Gradle"
++APP_BASE_NAME=${0##*/}
++
++# Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
++DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
++
++# Use the maximum available, or set MAX_FD != -1 to use that value.
++MAX_FD=maximum
++
++warn () {
++    echo "$*"
++} >&2
++
++die () {
++    echo
++    echo "$*"
++    echo
++    exit 1
++} >&2
++
++# OS specific support (must be 'true' or 'false').
++cygwin=false
++msys=false
++darwin=false
++nonstop=false
++case "$( uname )" in                #(
++  CYGWIN* )         cygwin=true  ;; #(
++  Darwin* )         darwin=true  ;; #(
++  MSYS* | MINGW* )  msys=true    ;; #(
++  NONSTOP* )        nonstop=true ;;
++esac
++
++CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
++
++
++# Determine the Java command to use to start the JVM.
++if [ -n "$JAVA_HOME" ] ; then
++    if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
++        # IBM's JDK on AIX uses strange locations for the executables
++        JAVACMD=$JAVA_HOME/jre/sh/java
++    else
++        JAVACMD=$JAVA_HOME/bin/java
++    fi
++    if [ ! -x "$JAVACMD" ] ; then
++        die "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME
++
++Please set the JAVA_HOME variable in your environment to match the
++location of your Java installation."
++    fi
++else
++    JAVACMD=java
++    which java >/dev/null 2>&1 || die "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
++
++Please set the JAVA_HOME variable in your environment to match the
++location of your Java installation."
++fi
++
++# Increase the maximum file descriptors if we can.
++if ! "$cygwin" && ! "$darwin" && ! "$nonstop" ; then
++    case $MAX_FD in #(
++      max*)
++        MAX_FD=$( ulimit -H -n ) ||
++            warn "Could not query maximum file descriptor limit"
++    esac
++    case $MAX_FD in  #(
++      '' | soft) :;; #(
++      *)
++        ulimit -n "$MAX_FD" ||
++            warn "Could not set maximum file descriptor limit to $MAX_FD"
++    esac
++fi
++
++# Collect all arguments for the java command, stacking in reverse order:
++#   * args from the command line
++#   * the main class name
++#   * -classpath
++#   * -D...appname settings
++#   * --module-path (only if needed)
++#   * DEFAULT_JVM_OPTS, JAVA_OPTS, and GRADLE_OPTS environment variables.
++
++# For Cygwin or MSYS, switch paths to Windows format before running java
++if "$cygwin" || "$msys" ; then
++    APP_HOME=$( cygpath --path --mixed "$APP_HOME" )
++    CLASSPATH=$( cygpath --path --mixed "$CLASSPATH" )
++
++    JAVACMD=$( cygpath --unix "$JAVACMD" )
++
++    # Now convert the arguments - kludge to limit ourselves to /bin/sh
++    for arg do
++        if
++            case $arg in                                #(
++              -*)   false ;;                            # don't mess with options #(
++              /?*)  t=${arg#/} t=/${t%%/*}              # looks like a POSIX filepath
++                    [ -e "$t" ] ;;                      #(
++              *)    false ;;
++            esac
++        then
++            arg=$( cygpath --path --ignore --mixed "$arg" )
++        fi
++        # Roll the args list around exactly as many times as the number of
++        # args, so each arg winds up back in the position where it started, but
++        # possibly modified.
++        #
++        # NB: a `for` loop captures its iteration list before it begins, so
++        # changing the positional parameters here affects neither the number of
++        # iterations, nor the values presented in `arg`.
++        shift                   # remove old arg
++        set -- "$@" "$arg"      # push replacement arg
++    done
++fi
++
++# Collect all arguments for the java command;
++#   * $DEFAULT_JVM_OPTS, $JAVA_OPTS, and $GRADLE_OPTS can contain fragments of
++#     shell script including quotes and variable substitutions, so put them in
++#     double quotes to make sure that they get re-expanded; and
++#   * put everything else in single quotes, so that it's not re-expanded.
++
++set -- \
++        "-Dorg.gradle.appname=$APP_BASE_NAME" \
++        -classpath "$CLASSPATH" \
++        org.gradle.wrapper.GradleWrapperMain \
++        "$@"
++
++# Use "xargs" to parse quoted args.
++#
++# With -n1 it outputs one arg per line, with the quotes and backslashes removed.
++#
++# In Bash we could simply go:
++#
++#   readarray ARGS < <( xargs -n1 <<<"$var" ) &&
++#   set -- "${ARGS[@]}" "$@"
++#
++# but POSIX shell has neither arrays nor command substitution, so instead we
++# post-process each arg (as a line of input to sed) to backslash-escape any
++# character that might be a shell metacharacter, then use eval to reverse
++# that process (while maintaining the separation between arguments), and wrap
++# the whole thing up as a single "set" statement.
++#
++# This will of course break if any of these variables contains a newline or
++# an unmatched quote.
++#
++
++eval "set -- $(
++        printf '%s\n' "$DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS" |
++        xargs -n1 |
++        sed ' s~[^-[:alnum:]+,./:=@_]~\\&~g; ' |
++        tr '\n' ' '
++    )" '"$@"'
++
++exec "$JAVACMD" "$@"
+Index: settings.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/settings.gradle b/settings.gradle
+new file mode 100644
+--- /dev/null	(date 1712109893400)
++++ b/settings.gradle	(date 1712109893400)
+@@ -0,0 +1,1 @@
++rootProject.name = "chap01"
+\ No newline at end of file
+Index: src/main/java/org/fullstack4/chap01/dto/BbsDTO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fullstack4/chap01/dto/BbsDTO.java b/src/main/java/org/fullstack4/chap01/dto/BbsDTO.java
+new file mode 100644
+--- /dev/null	(date 1712648693475)
++++ b/src/main/java/org/fullstack4/chap01/dto/BbsDTO.java	(date 1712648693475)
+@@ -0,0 +1,93 @@
++package org.fullstack4.chap01.dto;
++
++import java.time.LocalDate;
++import java.time.LocalDateTime;
++
++public class BbsDTO {
++    private int idx;
++    private String user_id;
++    private String title;
++    private String content;
++    private String display_date;
++    private LocalDate reg_date;
++    private LocalDate modify_date;
++    private int readcnt;
++
++    public int getIdx() {
++        return idx;
++    }
++
++    public void setIdx(int idx) {
++        this.idx = idx;
++    }
++
++    public String getUser_id() {
++        return user_id;
++    }
++
++    public void setUser_id(String user_id) {
++        this.user_id = user_id;
++    }
++
++    public String getTitle() {
++        return title;
++    }
++
++    public void setTitle(String title) {
++        this.title = title;
++    }
++
++    public String getContent() {
++        return content;
++    }
++
++    public void setContent(String content) {
++        this.content = content;
++    }
++
++    public String getDisplay_date() {
++        return display_date;
++    }
++
++    public void setDisplay_date(String display_date) {
++        this.display_date = display_date;
++    }
++
++    public LocalDate getReg_date() {
++        return reg_date;
++    }
++
++    public void setReg_date(LocalDate reg_date) {
++        this.reg_date = reg_date;
++    }
++
++    public LocalDate getModify_date() {
++        return modify_date;
++    }
++
++    public void setModify_date(LocalDate modify_date) {
++        this.modify_date = modify_date;
++    }
++
++    public int getReadcnt() {
++        return readcnt;
++    }
++
++    public void setReadcnt(int readcnt) {
++        this.readcnt = readcnt;
++    }
++
++    @Override
++    public String toString() {
++        return "BbsDTO{" +
++                "idx=" + idx +
++                ", user_id='" + user_id + '\'' +
++                ", title='" + title + '\'' +
++                ", content='" + content + '\'' +
++                ", display_date='" + display_date + '\'' +
++                ", reg_date=" + reg_date +
++                ", modify_date=" + modify_date +
++                ", readcnt=" + readcnt +
++                '}';
++    }
++}
+Index: src/main/java/org/fullstack4/chap01/service/BbsService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fullstack4/chap01/service/BbsService.java b/src/main/java/org/fullstack4/chap01/service/BbsService.java
+new file mode 100644
+--- /dev/null	(date 1712647687241)
++++ b/src/main/java/org/fullstack4/chap01/service/BbsService.java	(date 1712647687241)
+@@ -0,0 +1,58 @@
++package org.fullstack4.chap01.service;
++
++import org.fullstack4.chap01.dao.BbsDAO;
++import org.fullstack4.chap01.domain.BbsVO;
++import org.fullstack4.chap01.dto.BbsDTO;
++
++
++import java.time.LocalDate;
++import java.util.List;
++import java.util.stream.Collectors;
++import java.util.stream.IntStream;
++
++public enum BbsService {
++
++    INSTANCE;
++
++    public List<BbsDTO> bbsList(){
++        List<BbsDTO> bbsDTOS = IntStream.range(0,10).mapToObj(i->{
++            BbsDTO dto = new BbsDTO();
++            dto.setIdx(i);
++            dto.setUser_id("Web User..." +i);
++            dto.setTitle("Bbs Title... "+ i);
++            dto.setContent("Bbs Content..." + i);
++            dto.setDisplay_date(LocalDate.now().toString());
++            dto.setReadcnt(0);
++
++            return dto;
++        }).collect(Collectors.toList());
++
++
++        return bbsDTOS;
++    }
++
++    public BbsDTO view(int idx){
++        BbsDTO dto = new BbsDTO();
++        dto.setIdx(idx);
++        dto.setUser_id("Web User");
++        dto.setTitle("Bbs Title... ");
++        dto.setContent("Bbs Content...");
++        dto.setDisplay_date(LocalDate.now().toString());
++        dto.setReadcnt(0);
++
++        return dto;
++    }
++
++    public void testRegist(BbsVO vo) throws Exception{
++
++        BbsDAO dao = new BbsDAO();
++        vo = BbsVO.builder()
++                .user_id("test")
++                .title("게시글 제목 테스트")
++                .content("게시글 내용 테스트")
++                .display_date(LocalDate.now().toString())
++                .readcnt(0)
++                .build();
++        dao.regist(vo);
++    }
++}
+Index: src/main/java/org/fullstack4/chap01/HelloServlet.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/org/fullstack4/chap01/HelloServlet.java b/src/main/java/org/fullstack4/chap01/HelloServlet.java
+new file mode 100644
+--- /dev/null	(date 1712112140961)
++++ b/src/main/java/org/fullstack4/chap01/HelloServlet.java	(date 1712112140961)
+@@ -0,0 +1,29 @@
++package org.fullstack4.chap01;
++
++import java.io.*;
++import javax.servlet.http.*;
++import javax.servlet.annotation.*;
++
++@WebServlet(name = "helloServlet", value = "/hello-servlet")
++public class HelloServlet extends HttpServlet {
++    private String message;
++
++    public void init() {
++        message = "Hello World!";
++    }
++
++    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
++        response.setContentType("text/html");
++
++        // Hello
++        PrintWriter out = response.getWriter();
++        out.println("<html><body>");
++        out.println("<h1>" + message + "</h1>");
++        out.println("<h1>" + message + "</h1>");
++        out.println("<h1>" + message + "</h1>");
++        out.println("</body></html>");
++    }
++
++    public void destroy() {
++    }
++}
+\ No newline at end of file
+Index: src/main/webapp/index.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/index.jsp b/src/main/webapp/index.jsp
+new file mode 100644
+--- /dev/null	(date 1712197055855)
++++ b/src/main/webapp/index.jsp	(date 1712197055855)
+@@ -0,0 +1,20 @@
++<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
++<!DOCTYPE html>
++<html>
++<head>
++    <title>JSP - Hello World</title>
++</head>
++<body>
++<h1><%= "Hello World!" %></h1>
++
++<ul>
++    <li><a href="/bbs/regist">등록</a></li>
++    <li><a href="/bbs/modify">수정</a></li>
++    <li><a href="/bbs/delete">삭제</a></li>
++    <li><a href="/bbs/list">리스트</a></li>
++    <li><a href="/bbs/view">상세</a></li>
++</ul>
++<br/>
++<a href="/calc">계산하기 테스트</a>
++</body>
++</html>
+Index: src/main/webapp/WEB-INF/web.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/WEB-INF/web.xml b/src/main/webapp/WEB-INF/web.xml
+new file mode 100644
+--- /dev/null	(date 1712109893411)
++++ b/src/main/webapp/WEB-INF/web.xml	(date 1712109893411)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
++         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
++         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
++         version="4.0">
++</web-app>
+\ No newline at end of file
+Index: gradle/wrapper/gradle-wrapper.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/gradle/wrapper/gradle-wrapper.properties b/gradle/wrapper/gradle-wrapper.properties
+new file mode 100644
+--- /dev/null	(date 1712109893401)
++++ b/gradle/wrapper/gradle-wrapper.properties	(date 1712109893401)
+@@ -0,0 +1,5 @@
++distributionBase=GRADLE_USER_HOME
++distributionPath=wrapper/dists
++distributionUrl=https\://services.gradle.org/distributions/gradle-8.2-bin.zip
++zipStoreBase=GRADLE_USER_HOME
++zipStorePath=wrapper/dists
+Index: src/main/webapp/WEB-INF/input.jsp
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/webapp/WEB-INF/input.jsp b/src/main/webapp/WEB-INF/input.jsp
+new file mode 100644
+--- /dev/null	(date 1712132549820)
++++ b/src/main/webapp/WEB-INF/input.jsp	(date 1712132549820)
+@@ -0,0 +1,28 @@
++<%--
++  Created by IntelliJ IDEA.
++  User: user
++  Date: 2024-04-03
++  Time: 오후 1:37
++  To change this template use File | Settings | File Templates.
++--%>
++<%@ page contentType="text/html;charset=UTF-8" language="java" %>
++<html>
++<head>
++    <title>Title</title>
++</head>
++<body>
++<%
++    String errCode = request.getAttribute("errCode") == null?"": request.getAttribute("errCode")+"";
++%>
++<form name="frm" id="frmCalc" method="post" action="/calc">
++
++    <input type="text" name="num1" /></br>
++    <input type="text" name="num2" /></br>
++
++    <div style="display:<%=(errCode != "" ? "block" : "none" )%>">에러</div>
++    <input type="submit" value="END" /></br>
++
++</form>
++
++</body>
++</html>
