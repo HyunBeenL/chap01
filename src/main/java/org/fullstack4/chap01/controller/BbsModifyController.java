@@ -1,15 +1,35 @@
 package org.fullstack4.chap01.controller;
 
+import lombok.extern.log4j.Log4j2;
+import org.fullstack4.chap01.dto.BbsDTO;
+import org.fullstack4.chap01.service.BbsService;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
+@Log4j2
 @WebServlet(name = "BbsModifyController", value = "/bbs/modify")
 public class BbsModifyController extends HttpServlet {
+
+    private BbsService service = BbsService.INSTANCE;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/bbs/modify.jsp").forward(req, resp);
+        int idx = (req.getParameter("idx") == null ?0:Integer.parseInt(req.getParameter("idx"))) ;
+        if(idx >0) {
+            try {
+                BbsDTO bbsDTO = service.view(idx);
+
+            } catch (Exception e) {
+                log.info("=================================");
+                log.info("===========수정 에러==============" + e.getMessage());
+                log.info("=================================");
+                e.printStackTrace();
+            }
+            req.getRequestDispatcher("/WEB-INF/bbs/modify.jsp").forward(req, resp);
+        }
     }
 
     @Override

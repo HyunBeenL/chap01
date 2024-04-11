@@ -112,7 +112,7 @@ public class BbsDAO {
         return vo;
     }
 
-    public void modify(BbsVO vo) throws Exception{
+    public int modify(BbsVO vo) throws Exception{
         StringBuilder sb = new StringBuilder();
         sb.append("UPDATE tbl_bbs SET");
         sb.append(" user_id=? ");
@@ -137,6 +137,7 @@ public class BbsDAO {
         System.out.println("BbsDAO >> modify(");
         System.out.println("=================================");
 
+        return result;
     }
 
     public void delete(int idx) throws Exception{
