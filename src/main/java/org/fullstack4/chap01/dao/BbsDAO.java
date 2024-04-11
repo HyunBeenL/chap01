@@ -1,6 +1,7 @@
 package org.fullstack4.chap01.dao;
 
 import lombok.Cleanup;
+import lombok.extern.log4j.Log4j2;
 import org.fullstack4.chap01.domain.BbsVO;
 
 import java.sql.Connection;
@@ -8,7 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
+@Log4j2
 public class BbsDAO {
 
     public String getTime(){
@@ -140,18 +141,21 @@ public class BbsDAO {
         return result;
     }
 
-    public void delete(int idx) throws Exception{
+    public int delete(int idx) throws Exception{
         String sql = "DELETE FROM tbl_bbs WHERE idx = ? ";
 
 
         @Cleanup Connection conn = ConnectionUtil.INSTANCE.getConnection();
         @Cleanup PreparedStatement pstmt = conn.prepareStatement(sql);
-
+        pstmt.setInt(1,idx);
         int result = pstmt.executeUpdate();
 
-        System.out.println("=================================");
-        System.out.println("BbsDAO >>  delete(");
-        System.out.println("=================================");
+        log.info("=================================");
+        log.info("BbsDAO >>  delete(");
+        log.info("=================================");
+        
+        return result;
+
     }
 
 }

@@ -13,12 +13,17 @@
 <body>
 <h1>게시판 상세</h1>
 <div>
+    <form name="frmDelete" id="frmDelete" method="post" action="/bbs/delete?idx=${dto.idx}">
     <div>${dto.idx}</div>
     <div>${dto.user_id}</div>
     <div>${dto.title}</div>
     <div>${dto.content}</div>
     <div>${dto.display_date}</div>
     <div>${dto.readcnt}</div>
+    <div>
+        <input type="submit" name="deletebtn" value="삭제">
+        <button type="button" name="modifybtn" onclick="location.href='/bbs/modify?idx=${dto.idx}'">수정</button>
+    </div>
     </form>
 </div>
 <ul>

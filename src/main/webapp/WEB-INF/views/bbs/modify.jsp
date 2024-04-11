@@ -70,13 +70,14 @@
     let check = true;
 
     modifybtn.addEventListener('click', (e)=>{
+        e.preventDefault();
         if(title.value == null || title.value.trim()== ""||display_date.value == null || display_date.value.trim()== ""||content.value == null || content.value.trim()== "" ){
             check = false;
         }
         else{
             check = true;
         }
-       e.preventDefault();
+
        if(!check){
            alert("필수 입력사항을 확인하세요");
            return false;

@@ -6,9 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="f505858d-090e-4ba9-b044-1e78a253325c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/controller/BbsModifyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/controller/BbsModifyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/controller/BbsDeleteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/controller/BbsDeleteController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/dao/BbsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/dao/BbsDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/service/BbsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/service/BbsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/lo4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/bbs/modify.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/bbs/modify.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/bbs/view.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/bbs/view.jsp" afterDir="false" />
     </list>
@@ -75,48 +76,48 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.BbsDAOTests.list.executor": "Run",
-    "Gradle.BbsDAOTests.testDelete.executor": "Run",
-    "Gradle.BbsDAOTests.testGetTime.executor": "Run",
-    "Gradle.BbsDAOTests.testGetTime2.executor": "Run",
-    "Gradle.BbsDAOTests.testList.executor": "Run",
-    "Gradle.BbsDAOTests.testModify.executor": "Run",
-    "Gradle.BbsDAOTests.testRegist.executor": "Run",
-    "Gradle.Build chap01.executor": "Run",
-    "Gradle.ConnectTests.executor": "Run",
-    "Gradle.ConnectTests.testHikariCP.executor": "Run",
-    "Gradle.chap01 [dependencies].executor": "Run",
-    "JavaScript Debug.index.jsp.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Tomcat Server.Tomcat 9.0.871.executor": "Run",
-    "Tomcat Server.import.jsp.executor": "Run",
-    "Tomcat Server.index.jsp.executor": "Run",
-    "Tomcat Server.regist.jsp.executor": "Run",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/JAVA4/JAVA/Project1/chap01",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propCompiler",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.BbsDAOTests.list.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.BbsDAOTests.testDelete.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.BbsDAOTests.testGetTime.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.BbsDAOTests.testGetTime2.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.BbsDAOTests.testList.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.BbsDAOTests.testModify.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.BbsDAOTests.testRegist.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Build chap01.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConnectTests.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.ConnectTests.testHikariCP.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.chap01 [dependencies].executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript Debug.index.jsp.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Tomcat Server.Tomcat 9.0.871.executor&quot;: &quot;Run&quot;,
+    &quot;Tomcat Server.import.jsp.executor&quot;: &quot;Run&quot;,
+    &quot;Tomcat Server.index.jsp.executor&quot;: &quot;Run&quot;,
+    &quot;Tomcat Server.regist.jsp.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/JAVA4/JAVA/Project1/chap01&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mariadb"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mariadb&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\JAVA4\JAVA\Project1\chap01\src\main\webapp\WEB-INF\views" />
@@ -364,7 +365,8 @@
       <workItem from="1712652188189" duration="311000" />
       <workItem from="1712793923215" duration="577000" />
       <workItem from="1712794726868" duration="270000" />
-      <workItem from="1712795066098" duration="18721000" />
+      <workItem from="1712795066098" duration="20832000" />
+      <workItem from="1712824181835" duration="1399000" />
     </task>
     <servers />
   </component>

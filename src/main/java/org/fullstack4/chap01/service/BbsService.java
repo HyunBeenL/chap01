@@ -92,4 +92,8 @@ public enum BbsService {
         int result = dao.modify(bbsVO);
         return result;
     }
+
+    public int delete(int idx) throws Exception{
+        return dao.delete(idx);
+    }
 }
