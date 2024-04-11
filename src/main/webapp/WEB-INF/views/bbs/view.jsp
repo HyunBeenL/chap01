@@ -23,7 +23,7 @@
 </div>
 <ul>
     <li><a href="/bbs/regist">등록</a></li>
-    <li><a href="/bbs/modify">수정</a></li>
+    <li><a href="/bbs/modify?idx=${dto.idx}">수정</a></li>
     <li><a href="/bbs/delete">삭제</a></li>
     <li><a href="/bbs/list">리스트</a></li>
     <li><a href="/bbs/view">상세</a></li>

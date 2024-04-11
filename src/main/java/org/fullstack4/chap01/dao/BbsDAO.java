@@ -104,7 +104,7 @@ public class BbsDAO {
                 .user_id(rs.getString("user_id"))
                 .title(rs.getString("title"))
                 .content(rs.getString("content"))
-                .display_date(rs.getString("content"))
+                .display_date(rs.getString("display_date"))
                 .readcnt(rs.getInt("read_cnt"))
                 .reg_date(rs.getDate("reg_date").toLocalDate())
                 .build();

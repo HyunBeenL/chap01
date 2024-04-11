@@ -83,4 +83,13 @@ public enum BbsService {
         int result = dao.regist(bbsVO);
         return result;
     }
+
+    public int modify(BbsDTO bbsDTO) throws Exception{
+//        BbsDAO dao = new BbsDAO();
+
+        BbsVO bbsVO = modelMapper.map(bbsDTO, BbsVO.class);
+
+        int result = dao.modify(bbsVO);
+        return result;
+    }
 }

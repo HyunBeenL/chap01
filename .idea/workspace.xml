@@ -8,7 +8,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/controller/BbsModifyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/controller/BbsModifyController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/dao/BbsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/dao/BbsDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/bbs/regist.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/bbs/regist.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/service/BbsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/service/BbsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/bbs/modify.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/bbs/modify.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/bbs/view.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/bbs/view.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -362,7 +364,7 @@
       <workItem from="1712652188189" duration="311000" />
       <workItem from="1712793923215" duration="577000" />
       <workItem from="1712794726868" duration="270000" />
-      <workItem from="1712795066098" duration="12760000" />
+      <workItem from="1712795066098" duration="18721000" />
     </task>
     <servers />
   </component>

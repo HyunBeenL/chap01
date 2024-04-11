@@ -21,14 +21,14 @@ public class BbsModifyController extends HttpServlet {
         if(idx >0) {
             try {
                 BbsDTO bbsDTO = service.view(idx);
-
+                req.setAttribute("bbsDTO", bbsDTO);
             } catch (Exception e) {
                 log.info("=================================");
-                log.info("===========수정 에러==============" + e.getMessage());
+                log.info("=======수정 게시물 로드 에러========" + e.getMessage());
                 log.info("=================================");
                 e.printStackTrace();
             }
-            req.getRequestDispatcher("/WEB-INF/bbs/modify.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/bbs/modify.jsp").forward(req, resp);
         }
     }
 
@@ -37,9 +37,11 @@ public class BbsModifyController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         boolean check_flag = true;
+        String user_id = req.getParameter("user_id");
         String idx = req.getParameter("idx")==null?"":req.getParameter("idx");
         String title = req.getParameter("title");
         String reg_date = req.getParameter("reg_date");
+        String display_date = req.getParameter("display_date");
         String content = req.getParameter("content");
         String[] hobbie = req.getParameterValues("hobbie");
         String sex = req.getParameter("sex");
@@ -47,11 +49,12 @@ public class BbsModifyController extends HttpServlet {
         String regDaterrmsg = "";
         String contenterrmsg = "";
 
-        if(title == null || title.trim().isEmpty() || reg_date == null || reg_date.isEmpty() || content.isEmpty() || content == null) {
+
+        if(title == null || title.trim().isEmpty() || display_date == null || display_date.isEmpty() || content.isEmpty() || content == null) {
             if(title == null || title.trim().isEmpty()){
                 titlerrmsg = "제목 입력";
             }
-            if(reg_date == null || reg_date.trim().isEmpty()){
+            if(display_date == null || display_date.trim().isEmpty()){
                 regDaterrmsg = "날짜 입력";
             }
             if(content.isEmpty() || content == null){
@@ -61,12 +64,35 @@ public class BbsModifyController extends HttpServlet {
         }
 
         if(check_flag){
-            System.out.println("수정 완료");
-            resp.sendRedirect("/bbs/list");
+            int read_cnt = 0;
+            BbsDTO dto = BbsDTO.builder()
+                    .user_id(user_id)
+                    .idx(Integer.parseInt(idx))
+                    .title(title)
+                    .content(content)
+                    .display_date(display_date)
+                    .readcnt(read_cnt)
+                    .build();
+
+            int result = 0;
+            try{
+                result = service.modify(dto);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            if(result>0){
+                System.out.println("수정 완료");
+                resp.sendRedirect("/bbs/list");
+            }
+            else{
+                req.setAttribute("result",result);
+                req.getRequestDispatcher("/WEB-INF/views/bbs/modify.jsp?titlerrMsg="+titlerrmsg+"&regDaterrMsg="+regDaterrmsg+"&contenterrMsg="+contenterrmsg+"&idx="+idx).forward(req,resp);
+            }
 
         }else{
             System.out.println("수정 실패");
-            req.getRequestDispatcher("/WEB-INF/bbs/modify.jsp?titlerrMsg="+titlerrmsg+"&regDaterrMsg="+regDaterrmsg+"&contenterrMsg="+contenterrmsg+"&idx="+idx).forward(req,resp);
+            req.getRequestDispatcher("/WEB-INF/views/bbs/modify.jsp?titlerrMsg="+titlerrmsg+"&regDaterrMsg="+regDaterrmsg+"&contenterrMsg="+contenterrmsg+"&idx="+idx).forward(req,resp);
 
         }
 
