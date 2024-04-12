@@ -5,22 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f505858d-090e-4ba9-b044-1e78a253325c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/controller/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/controller/StartController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/dao/MemberDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/domain/MemberVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/dto/MemberDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/filter/LoginCheckFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/filter/UTF8Filter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/service/MemberService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/util/CommonUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/util/CookieUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/home.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/member/login.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/fullstack4/chap01/MemberTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/listener/F4Applistener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/HelloServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/HelloServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/controller/BbsListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/fullstack4/chap01/controller/BbsListController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/bbs/list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/bbs/list.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -377,7 +365,7 @@
       <workItem from="1712794726868" duration="270000" />
       <workItem from="1712795066098" duration="20832000" />
       <workItem from="1712824181835" duration="4187000" />
-      <workItem from="1712879528822" duration="18663000" />
+      <workItem from="1712879528822" duration="20778000" />
     </task>
     <servers />
   </component>
