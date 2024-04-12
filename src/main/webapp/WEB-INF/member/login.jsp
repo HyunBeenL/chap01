@@ -57,15 +57,21 @@
 <div class="container">
     <h2>Login</h2>
     <form action="/member/login" method="post">
-        <input type="text" name="user_id" placeholder="User_id" value="${requestScope.save_id}"required>
+        <input type="text" name="user_id" id="user_id" placeholder="User_id" value="${requestScope.save_id}"required>
         <input type="password" name="pwd" placeholder="Password" required>
         <label> 자동 로그인 </label><input type="checkbox" name="auto">
-        <label> 아이디 저장 </label><input type="checkbox" name="saved">
+        <label> 아이디 저장 </label><input type="checkbox" name="saved" id="saved">
 
         <input type="submit" value="Login">
     </form>
     <p style="color:red">${requestScope.errMsg}</p>
 </div>
 </body>
+<script>
+
+    if(document.querySelector("#user_id").value != "") {
+        document.querySelector("#saved").checked = true;
+    }
+</script>
 </html>
 
