@@ -8,7 +8,9 @@ public class CommonUtil {
     public static boolean login(HttpSession session){
         return session.getAttribute("user_id") != null;
     }
+
     public static boolean autologincheck(HttpServletRequest req) {
-        return CookieUtil.getCookieValue(req, "user_id") != "";
+        String id = CookieUtil.getCookieValue(req, "user_id") ==null?"":CookieUtil.getCookieValue(req, "user_id");
+        return id != "";
     }
 }

@@ -9,8 +9,6 @@
 <body>
 <% String cookie = CookieUtil.getCookieValue(request,"user_id")==null?"":CookieUtil.getCookieValue(request,"user_id");%>
 <h1><%= "Hello World!" %></h1>
-<h1><%= cookie%></h1>
-<h1><%= session.getAttribute("user_id")%></h1>
 <ul>
     <li><a href="/bbs/regist">등록</a></li>
     <li><a href="/bbs/modify">수정</a></li>
